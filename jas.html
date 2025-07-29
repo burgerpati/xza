@@ -18,14 +18,16 @@
     <main>
       <div class="welcome">
         <h1 class="greeting">
-          Hello <span class="second-line">Jasmine Rose!</span>
+          Hello <span class="second-line">Tintin!</span>
         </h1>
         <h3 class="monthsary-date">04-27-25</h3>
-        <button class="play-btn">Play</button>
-        <img src="sab-stand.svg" alt="sabby">
-        <img src="isha-stand.svg" alt="isha">
-      </div>
-    </main>
-    <script src="welcome.js"></script>
-  </body>
-</html>
+<button class="play-btn" id="yesBtn">Yes</button>
+<img src="sab-stand.svg" alt="sabby">
+<img src="isha-stand.svg" alt="isha">
+
+<script src="welcome.js"></script> <!-- Keep your original JS -->
+<script>
+  document.getElementById("yesBtn").addEventListener("click", function() {
+    window.location.href = "game.html"; // Redirect to game.html
+  });
+</script>
