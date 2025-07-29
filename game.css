@@ -1,6 +1,6 @@
 
 body {
-background: lightblue url('../images/background-2.jpeg') center/cover no-repeat;
+background: lightblue url('background-2.jpeg') center/cover no-repeat;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -8,7 +8,7 @@ justify-content: center;
 height: 100vh;
 margin: 0;
  
-background-image: url(/images/background-2.jpeg);
+background-image: url('background-2.jpeg');
 background-position: center;
 background-size: cover;
 
@@ -92,7 +92,7 @@ overflow: hidden;
 }
 .rose {
   position: absolute;
-  background: url('../images/rose.svg') no-repeat center/contain;
+  background: url('rose.svg') no-repeat center/contain;
   width: 4.375rem;
   height: 4.375rem;
   animation: fall linear infinite;
@@ -246,27 +246,27 @@ p {
 }
 
 .upButton {
-  background-image: url(/images/up-arrow.svg);
+  background-image: url('up-arrow.svg');
   grid-column: 2;
   grid-row: 1;
 
 }
 
 .leftButton {
-  background-image: url(/images/left-arrow.svg);
+  background-image: url('left-arrow.svg');
   grid-column: 1;
   grid-row: 2;
 }
 
 .rightButton {
-  background-image: url(/images/right-arrow.svg);
+  background-image: url('right-arrow.svg');
   grid-column: 3;
   grid-row: 2;
 }
 
 
 .downButton {
-  background-image: url(/images/down-arrow.svg);
+  background-image: url('down-arrow.svg');
   grid-column: 2;
   grid-row: 3;
 }
