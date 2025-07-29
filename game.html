@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Love Maze</title>
-    <link rel="stylesheet" href="game.css" />
+    <link rel="stylesheet" href="game.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,13 +16,13 @@
     <div class="roseContainer"></div>
 
     <div class="dialogueContainer">
-      <img src="sab-rose.svg" class="sabRose" alt="Sab holding a rose" />
+      <img src="sab-rose.svg" alt="Sab holding a rose">
       <div class="dialogueBox">
         <p class="dialogueText">
           Bien wants to give you something, can you help him go
           through the maze?
         </p>
-        <img src="chatbox.svg" class="box" alt="Dialogue chatbox" />
+        <img src="chatbox.svg" alt="chatbox">
         <button class="yesBtn">Yes</button>
       </div>
     </div>
@@ -33,5 +33,37 @@
         <p>Bienvenido</p>
       </div>
       <div class="images">
-        <img src="maze-walls.png" class="mazeWalls" alt="Maze walls" />
-        <img src="maze-background.png" class="mazeBack
+        <img src="maze-walls.png" alt="Maze walls">
+       <img src="maze-background.png" alt="mazeBackground">
+          <img src="sab.svg" alt="sab">
+          <img src="isha.svg" alt="isha">
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="upButton"></button>
+        <button class="leftButton"></button>
+        <button class="rightButton"></button>
+        <button class="downButton"></button>
+      </div>
+
+      <div class="finishScene">
+        <img src="sab-rose.svg" alt="sabStand">
+        <img src="giveRose.svg" alt="giveRose">
+        <img src="isha-stand.svg" alt="ishaStand">
+        <div class="finishDialogue">
+            <p class="finish firstLine">Hi Tintin</p>
+            <p class="finish secondLine">Thanks for helping me</p>
+            <p class="finish thirdLine">I thought I was lost</p>
+            <p class="finish fourthLine">but then I found you</p>
+            <p class="finish fifthLine">HAHAAHAH</p>
+            <p class="finish sixthLine">Here's your GIFT</p>
+            <p class="finish seventhLine">STREAKKKKK</p>
+          <button class="nextButton">Next</button>
+          <img src="chatbox.svg" class="finishBox">
+        </div>
+      </div>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
