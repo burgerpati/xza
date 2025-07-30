@@ -9,7 +9,8 @@ justify-content: center;
 height: 100vh;
 margin: 0;
  
-background-image: url('background.png');
+ background: url('https://i.pinimg.com/originals/50/c7/38/50c738083fa2175842f6448e2e610b45.gif') center/cover no-repeat;
+ image-rendering: pixelated;
 background-position: center;
 background-size: cover;
 }
