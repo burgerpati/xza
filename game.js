@@ -1,120 +1,128 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ---------------- DOM ELEMENTS ----------------
   const roseContainer = document.querySelector('.roseContainer');
   const yesBtn = document.querySelector('.yesBtn');
-  const maze = document.querySelector('.mazeScene');
-  const controls = document.querySelector('.controls');
-  const sabCharacter = document.querySelector('.sab');
-  const finishScene = document.querySelector('.finishScene');
-  const nextButton = document.querySelector('.nextButton');
-  const sabStand = document.querySelector('.sabStand');
-  const giveRose = document.querySelector('.giveRose');
 
-  // Buttons
   const upButton = document.querySelector('.upButton');
   const rightButton = document.querySelector('.rightButton');
   const leftButton = document.querySelector('.leftButton');
   const downButton = document.querySelector('.downButton');
 
-  // Music
-  const gameAudio = new Audio('game-audio.mp3');
+  const sabCharacter = document.querySelector('.sab');
+  const ishaCharacter = document.querySelector('.isha');
+
+  const maze = document.querySelector('.mazeScene');
+  const controls = document.querySelector('.controls');
+  const finishScene = document.querySelector('.finishScene');
+  const nextButton = document.querySelector('.nextButton');
+
+  const sabStand = document.querySelector('.sabStand');
+  const giveRose = document.querySelector('.giveRose');
+
+  const dialogueContainer = document.querySelector('.dialogueContainer');
+
+  let finishTexts = document.querySelectorAll('.finish');
+
+  // ---------------- AUDIO ----------------
+  let gameAudio = new Audio('game-audio.mp3');
+  let finishAudio = new Audio('finish-audio.mp3');
   gameAudio.volume = 1.0;
   gameAudio.loop = true;
+  gameAudio.play();
 
-  const finishAudio = new Audio('finish-audio.mp3');
-
-  // Falling Roses
+  // ---------------- FALLING ROSES ----------------
   function createRose() {
     const rose = document.createElement('div');
     rose.classList.add('rose');
     rose.style.left = `${Math.random() * 100}vw`;
-    rose.style.animationDuration = `${Math.random() * 4 + 3}s`;
-    rose.style.animationDelay = `${Math.random() * 2}s`;
+
+    const duration = Math.random() * 4 + 3; // 3-7 seconds
+    rose.style.animationDuration = `${duration}s`;
+
+    const delay = Math.random() * 2;
+    rose.style.animationDelay = `${delay}s`;
+
     roseContainer.appendChild(rose);
+
     rose.addEventListener('animationend', () => rose.remove());
   }
 
-  const roseInterval = setInterval(createRose, 2000);
+  const roseInterval = setInterval(createRose, 1000);
 
-  // Start Maze after Yes Button Click
+  // ---------------- START MAZE ----------------
   yesBtn.addEventListener('click', () => {
-    document.querySelector('.dialogueContainer').style.display = 'none';
+    dialogueContainer.style.display = 'none';
     maze.style.display = 'flex';
     maze.style.justifyContent = 'center';
     maze.style.alignItems = 'center';
     controls.style.display = 'grid';
-
-    // Start music AFTER user interaction
-    if (gameAudio.paused) gameAudio.play().catch(err => console.log('Autoplay blocked:', err));
   });
 
+  // ---------------- CHARACTER MOVEMENT ----------------
   const moveStep = 20;
-  let isClicked = false;
+  function moveCharacter(direction) {
+    let currentTop = parseInt(getComputedStyle(sabCharacter).top);
+    let currentLeft = parseInt(getComputedStyle(sabCharacter).left);
 
-  function smallCharacter() {
-    if (isClicked) {
-      sabCharacter.style.height = `2rem`;
-      sabCharacter.style.width = `2rem`;
+    switch(direction) {
+      case 'up': currentTop -= moveStep; break;
+      case 'down': currentTop += moveStep; break;
+      case 'left': currentLeft -= moveStep; break;
+      case 'right': currentLeft += moveStep; break;
     }
+
+    sabCharacter.style.top = currentTop + 'px';
+    sabCharacter.style.left = currentLeft + 'px';
+    checkWin(currentLeft, currentTop);
   }
 
-  function winChecker() {
-    const currentLeft = parseInt(getComputedStyle(sabCharacter).left);
-    const currentTop = parseInt(getComputedStyle(sabCharacter).top);
+  // ---------------- WIN LOGIC ----------------
+  function checkWin(left, top) {
+    // Example winning zone (adjust according to maze layout)
+    const winLeft = 560;
+    const winTopMin = 340;
+    const winTopMax = 380;
 
-    if ((currentLeft === 560 && (currentTop === 360 || currentTop === 380))) {
+    if(left === winLeft && top >= winTopMin && top <= winTopMax){
       gameAudio.pause();
       finishAudio.play();
-
-      sabCharacter.style.height = `4rem`;
-      sabCharacter.style.width = `4rem`;
-      sabCharacter.style.top = `348px`;
 
       maze.style.display = 'none';
       controls.style.display = 'none';
       finishScene.style.display = 'flex';
+      sabStand.style.display = 'none';
+      giveRose.style.display = 'block';
 
       let nextLine = 0;
       nextButton.addEventListener('click', () => {
-        nextLine++;
-        const lines = ['firstLine','secondLine','thirdLine','fourthLine','fifthLine','sixthLine','seventhLine'];
-        if (nextLine < lines.length) {
-          document.querySelector(`.${lines[nextLine-1]}`).style.opacity = 0;
-          document.querySelector(`.${lines[nextLine]}`).style.opacity = 1;
-          if(nextLine === 5) { sabStand.style.display='none'; giveRose.style.display='block'; }
+        if(nextLine < finishTexts.length){
+          finishTexts.forEach(el => el.style.opacity = 0);
+          finishTexts[nextLine].style.opacity = 1;
+          nextLine++;
         } else {
           clearInterval(roseInterval);
-          setTimeout(()=> window.location.href='jas.html',400);
+          setTimeout(() => {
+            window.location.href = 'jas.html';
+          }, 400);
         }
       });
     }
   }
 
-  function moveCharacter(direction) {
-    isClicked = true;
-    smallCharacter();
-    let currentTop = parseInt(getComputedStyle(sabCharacter).top || 0);
-    let currentLeft = parseInt(getComputedStyle(sabCharacter).left || 0);
+  // ---------------- CONTROL BUTTON EVENTS ----------------
+  upButton.addEventListener('click', () => moveCharacter('up'));
+  downButton.addEventListener('click', () => moveCharacter('down'));
+  leftButton.addEventListener('click', () => moveCharacter('left'));
+  rightButton.addEventListener('click', () => moveCharacter('right'));
 
-    switch(direction) {
-      case 'up': sabCharacter.style.top = currentTop - moveStep + 'px'; break;
-      case 'down': sabCharacter.style.top = currentTop + moveStep + 'px'; break;
-      case 'left': sabCharacter.style.left = currentLeft - moveStep + 'px'; break;
-      case 'right': sabCharacter.style.left = currentLeft + moveStep + 'px'; break;
-    }
-    winChecker();
-  }
-
-  upButton.addEventListener('click', ()=> moveCharacter('up'));
-  downButton.addEventListener('click', ()=> moveCharacter('down'));
-  leftButton.addEventListener('click', ()=> moveCharacter('left'));
-  rightButton.addEventListener('click', ()=> moveCharacter('right'));
-
-  document.addEventListener("keydown", (event) => {
-    switch(event.key) {
+  document.addEventListener('keydown', (e) => {
+    switch(e.key){
       case 'ArrowUp': moveCharacter('up'); break;
       case 'ArrowDown': moveCharacter('down'); break;
       case 'ArrowLeft': moveCharacter('left'); break;
       case 'ArrowRight': moveCharacter('right'); break;
     }
   });
+
 });
