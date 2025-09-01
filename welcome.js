@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const fakeError = document.querySelector('.fake-error');
 
   const heartsContainer = document.querySelector('.hearts-container') // grabs the hearts-container
   const playButton = document.querySelector('.play-btn');
 
-  let gameAudio = new Audio('../audio/game-audio.mp3');
+  let gameAudio = new Audio('game-audio.mp3');
   gameAudio.volume = 1.0;
   gameAudio.loop = true; 
 
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     heartsContainer.style.display = 'block';
     mainBody.style.display = 'block';
-    fakeError.style.display = 'none';
 
     function createHeart() {
         const heart = document.createElement('div');    // creates new div element
