@@ -127,12 +127,12 @@ body {
 }
 
 /* ---------------- Characters ---------------- */
-.BackgroundEraser_20250502_131244813, .isha {
+.chippoy, .isha {
   position: absolute;
   z-index: 2;
 }
 
-.BackgroundEraser_20250502_131244813 { height: 4rem; width: 4rem; top: 360px; left: 60px; }
+.chippoy { height: 4rem; width: 4rem; top: 360px; left: 60px; }
 .isha { height: 4rem; width: 4rem; top: 348px; right: 40px; }
 
 .sabStand, .giveRose {
