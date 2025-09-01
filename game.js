@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let finishTexts = document.querySelector('.finish'); 
   const nextButton = document.querySelector('.nextButton');
 
-  let gameAudio = new Audio('../audio/game-audio.mp3');
-  let finishAudio = new Audio('../audio/finish-audio.mp3');
+  let gameAudio = new Audio('game-audio.mp3');
+  let finishAudio = new Audio('finish-audio.mp3');
   gameAudio.volume = 1.0;
   gameAudio.loop = true;
   gameAudio.play();
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
              clearInterval(roseInterval);
              setTimeout(() => {
-                window.location.href = 'index.html'
+                window.location.href = 'jas.html'
               }, 400);
           }
         })
