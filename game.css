@@ -1,22 +1,24 @@
-/* ---------------- Global Styles ---------------- */
+/* ---------------- Global ---------------- */
 body {
-  background: lightblue url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif') center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
+  height: 100vh;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Pixelify Sans", sans-serif;
+  background: #FFD9E8;
 }
 
-/* ---------------- Dialogue / Welcome ---------------- */
+/* ---------------- Dialogue ---------------- */
 .dialogueContainer {
-  position: relative;
-  width: 70%;
-  height: 70%;
-  top: 20px;
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .sabRose {
@@ -29,249 +31,139 @@ body {
 
 .dialogueBox {
   position: absolute;
-  top: -10%;
-  left: 42%;
-  width: 80%;
-  height: 70%;
-  border-radius: 10px;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
 }
 
 .dialogueText {
-  position: absolute;
   font-size: 2rem;
-  color: black;
-  width: 48%;
   text-align: center;
-  top: 70px;
-  left: 65px;
-  z-index: 1;
+  color: #333;
 }
 
 .yesBtn {
-  position: absolute;
-  bottom: 1rem;
-  left: 25%;
-  padding: 0.625rem 1.25rem;
+  padding: 0.6rem 1.2rem;
   font-size: 2rem;
-  border: 2px solid black;
-  border-radius: 1.25rem;
+  border-radius: 20px;
+  border: 2px solid #333;
+  background: #ffb6c1;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  background: #fff;
+  transition: 0.3s ease;
 }
 
 .yesBtn:hover {
   transform: scale(1.15);
-  outline: 2px solid #333;
-}
-
-/* ---------------- Falling Roses ---------------- */
-.roseContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.rose {
-  position: absolute;
-  background: url('rose.svg') no-repeat center/contain;
-  width: 4.375rem;
-  height: 4.375rem;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-100px); opacity: 1; }
-  40% { opacity: 1; }
-  60% { opacity: 0.5; }
-  80% { opacity: 0.2; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  background: #ff69b4;
 }
 
 /* ---------------- Maze Scene ---------------- */
-.mazeScene, .finishScene {
+.mazeScene {
   display: none;
   position: relative;
+  width: 40%;
+  height: 80%;
+}
+
+.mazeBackground, .mazeWalls {
+  position: absolute;
   width: 800px;
   height: 700px;
-  margin: 0 auto;
-  top: 0;
-  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.mazeContainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #FFDFDF;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.mazeBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* Maze Walls */
-.wall {
-  position: absolute;
-  background-color: #8B0000; /* Dark red walls */
-  z-index: 2;
-}
-
-/* Characters */
 .sab, .isha {
   position: absolute;
   width: 4rem;
   height: 4rem;
-  z-index: 3;
+  transition: all 0.1s ease;
 }
 
-.sab { top: 360px; left: 60px; }
-.isha { top: 348px; right: 40px; }
-
-/* Character Stands */
-.sabStand, .giveRose {
-  position: absolute;
-  width: 25rem;
-  top: 10rem;
-  bottom: 0;
-  left: 30%;
-  transform: translateX(-50%);
+.sab.moving {
+  animation: bounce 0.2s ease-in-out;
 }
 
-.ishaStand {
-  position: absolute;
-  width: 19rem;
-  top: 13rem;
-  bottom: 0;
-  left: 75%;
-  transform: translateX(-50%);
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
-/* ---------------- Finish Dialogue ---------------- */
-.finishDialogue {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.finish {
-  position: absolute;
-  font-size: 2rem;
-  top: 4.8rem;
-  left: 16.5rem;
-  width: 14rem;
-  z-index: 1;
-}
-
-.finishBox {
-  position: absolute;
-  left: 20%;
-  width: 26rem;
-  height: 20rem;
-}
-
-.secondLine, .thirdLine, .fourthLine, .fifthLine, .sixthLine, .seventhLine {
-  opacity: 0;
-}
-
-/* ---------------- Buttons ---------------- */
-.nextButton {
-  position: absolute;
-  height: 3rem;
-  width: 6rem;
-  font-size: 20px;
-  border: solid 3px;
-  border-radius: 10px;
-  background: lightblue;
-  top: 7rem;
-  left: 35rem;
-  transition: 0.3s ease, transform 0.2s ease;
-}
-
-.nextButton:hover {
-  transform: scale(1.15);
-}
-
-/* ---------------- Header Text ---------------- */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-h1, p {
-  position: absolute;
-  z-index: 2;
-}
-
-h1 {
-  font-size: 3.5rem;
-  top: 1.8rem;
-}
-
-p {
-  font-size: 1.5rem;
-  top: 6.8rem;
-}
-
-/* ---------------- Controls Grid ---------------- */
 .controls {
-  display: grid;
   position: absolute;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  bottom: 5rem;
-  right: 33rem;
-  z-index: 3;
-  gap: 2px;
+  bottom: 2rem;
+  right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 50px);
+  gap: 5px;
 }
 
-.upButton, .rightButton, .downButton, .leftButton {
-  display: flex;
-  height: 50px;
-  width: 50px;  
-  cursor: pointer;
-  margin-top: 10px;
+.upButton, .downButton, .leftButton, .rightButton {
   border-radius: 50%;
-  transition: 0.3s ease, transform 0.2s ease;
-  z-index: 3;
-  font-size: 2rem;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.upButton:active,
-.rightButton:active,
-.leftButton:active,
-.downButton:active,
-.upButton.active,
-.leftButton.active,
-.rightButton.active,
-.downButton.active {
+.upButton { background-image: url('up-arrow.svg'); grid-column: 2; grid-row: 1;}
+.leftButton { background-image: url('left-arrow.svg'); grid-column: 1; grid-row: 2;}
+.rightButton { background-image: url('right-arrow.svg'); grid-column: 3; grid-row: 2;}
+.downButton { background-image: url('down-arrow.svg'); grid-column: 2; grid-row: 3;}
+
+.upButton:active, .downButton:active, .leftButton:active, .rightButton:active {
   transform: scale(1.5);
 }
 
-.upButton { background-image: url('up-arrow.svg'); grid-column: 2; grid-row: 1; }
-.leftButton { background-image: url('left-arrow.svg'); grid-column: 1; grid-row: 2; }
-.rightButton { background-image: url('right-arrow.svg'); grid-column: 3; grid-row: 2; }
-.downButton { background-image: url('down-arrow.svg'); grid-column: 2; grid-row: 3; }
-
-/* ---------------- Animations ---------------- */
-@keyframes fadeOutScale {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.8); }
+/* ---------------- Finish Scene ---------------- */
+.finishScene {
+  display: none;
+  position: absolute;
+  width: 50%;
+  height: 80%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.finishDialogue p { 
+  font-size: 2rem;
+  opacity: 0;
+}
+
+.finishDialogue .firstLine { opacity: 1; }
+
+.nextButton {
+  margin-top: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  background: #ffb6c1;
+  border-radius: 10px;
+  border: 2px solid #333;
+  cursor: pointer;
+}
+
+/* ---------------- Particle Effects ---------------- */
+.particleContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  background: url('heart.svg') no-repeat center/contain;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-50px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
