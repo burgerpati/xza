@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Love Maze Adventure</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Maze</title>
   <link rel="stylesheet" href="game.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Lilita+One&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Background Particles -->
-  <div class="particleContainer"></div>
+  <!-- Falling Roses Background -->
+  <div class="roseContainer"></div>
 
-  <!-- Dialogue / Start Screen -->
+  <!-- Dialogue / Welcome -->
   <div class="dialogueContainer">
     <img src="sab-rose.svg" alt="Sab holding a rose" class="sabRose">
     <div class="dialogueBox">
       <p class="dialogueText">
-        Hi! Can you help me go through the maze to give a gift?
+        lol wants to give you something, can you help him go through the maze?
       </p>
       <img src="chatbox.svg" alt="chatbox">
       <button class="yesBtn">Yes</button>
@@ -29,11 +32,12 @@
       <h1>Love Maze</h1>
       <p>Bienvenido</p>
     </div>
-
-    <img src="maze-background.png" alt="maze-background" class="mazeBackground">
-    <img src="maze-walls.png" alt="maze-walls" class="mazeWalls">
-    <img src="sab.svg" class="sab" alt="Sab">
-    <img src="isha.svg" class="isha" alt="Isha">
+    <div class="images">
+      <img src="maze-walls.png" alt="maze-walls" class="mazeWalls">
+      <img src="maze-background.png" alt="maze-background" class="mazeBackground">
+      <img src="chippoy.svg" alt="sab" class="sab">
+      <img src="isha.svg" alt="isha" class="isha">
+    </div>
 
     <!-- Controls -->
     <div class="controls">
@@ -46,19 +50,19 @@
 
   <!-- Finish Scene -->
   <div class="finishScene">
-    <img src="sab-rose.svg" class="sabStand">
-    <img src="giveRose.svg" class="giveRose">
-    <img src="isha-stand.svg" class="ishaStand">
+    <img src="sab-rose.svg" class="sabStand" alt="sab-stand">
+    <img src="giveRose.svg" class="giveRose" alt="giveRose">
+    <img src="isha-stand.svg" class="ishaStand" alt="isha-stand">
     <div class="finishDialogue">
-      <p class="finish firstLine">Hi Tintin!</p>
+      <p class="finish firstLine">Hi Tintin</p>
       <p class="finish secondLine">Thanks for helping me</p>
       <p class="finish thirdLine">I thought I was lost</p>
-      <p class="finish fourthLine">but then I found you!</p>
-      <p class="finish fifthLine">Yay!! 🎉</p>
-      <p class="finish sixthLine">Here's your GIFT 💝</p>
+      <p class="finish fourthLine">but then I found you</p>
+      <p class="finish fifthLine">HAHAAHAH</p>
+      <p class="finish sixthLine">Here's your GIFT</p>
       <p class="finish seventhLine">STREAKKKKK</p>
       <button class="nextButton">Next</button>
-      <img src="chatbox.svg" class="chatbox">
+      <img src="chatbox.svg" class="chatbox" alt="chatbox">
     </div>
   </div>
 
