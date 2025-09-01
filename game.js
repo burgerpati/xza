@@ -1,128 +1,91 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  // ---------------- DOM ELEMENTS ----------------
-  const roseContainer = document.querySelector('.roseContainer');
+  const dialogue = document.querySelector('.dialogueContainer');
   const yesBtn = document.querySelector('.yesBtn');
-
-  const upButton = document.querySelector('.upButton');
-  const rightButton = document.querySelector('.rightButton');
-  const leftButton = document.querySelector('.leftButton');
-  const downButton = document.querySelector('.downButton');
-
-  const sabCharacter = document.querySelector('.sab');
-  const ishaCharacter = document.querySelector('.isha');
-
   const maze = document.querySelector('.mazeScene');
+  const finish = document.querySelector('.finishScene');
+  const sab = document.querySelector('.sab');
   const controls = document.querySelector('.controls');
-  const finishScene = document.querySelector('.finishScene');
-  const nextButton = document.querySelector('.nextButton');
+  const nextBtn = document.querySelector('.nextButton');
+  const finishTexts = document.querySelectorAll('.finish');
+  const particleContainer = document.querySelector('.particleContainer');
 
-  const sabStand = document.querySelector('.sabStand');
-  const giveRose = document.querySelector('.giveRose');
+  let currentLine = 0;
+  let moveStep = 20;
 
-  const dialogueContainer = document.querySelector('.dialogueContainer');
+  // Play background music
+  let bgMusic = new Audio('game-audio.mp3');
+  bgMusic.loop = true;
+  bgMusic.volume = 0.8;
+  bgMusic.play();
 
-  let finishTexts = document.querySelectorAll('.finish');
-
-  // ---------------- AUDIO ----------------
-  let gameAudio = new Audio('game-audio.mp3');
-  let finishAudio = new Audio('finish-audio.mp3');
-  gameAudio.volume = 1.0;
-  gameAudio.loop = true;
-  gameAudio.play();
-
-  // ---------------- FALLING ROSES ----------------
-  function createRose() {
-    const rose = document.createElement('div');
-    rose.classList.add('rose');
-    rose.style.left = `${Math.random() * 100}vw`;
-
-    const duration = Math.random() * 4 + 3; // 3-7 seconds
-    rose.style.animationDuration = `${duration}s`;
-
-    const delay = Math.random() * 2;
-    rose.style.animationDelay = `${delay}s`;
-
-    roseContainer.appendChild(rose);
-
-    rose.addEventListener('animationend', () => rose.remove());
+  // Particle hearts
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left = `${Math.random() * 100}vw`;
+    particle.style.animationDuration = `${3 + Math.random()*3}s`;
+    particleContainer.appendChild(particle);
+    particle.addEventListener('animationend', () => particle.remove());
   }
+  setInterval(createParticle, 500);
 
-  const roseInterval = setInterval(createRose, 1000);
-
-  // ---------------- START MAZE ----------------
+  // Start game
   yesBtn.addEventListener('click', () => {
-    dialogueContainer.style.display = 'none';
-    maze.style.display = 'flex';
-    maze.style.justifyContent = 'center';
-    maze.style.alignItems = 'center';
+    dialogue.style.display = 'none';
+    maze.style.display = 'block';
     controls.style.display = 'grid';
   });
 
-  // ---------------- CHARACTER MOVEMENT ----------------
-  const moveStep = 20;
-  function moveCharacter(direction) {
-    let currentTop = parseInt(getComputedStyle(sabCharacter).top);
-    let currentLeft = parseInt(getComputedStyle(sabCharacter).left);
+  // Movement functions
+  function moveCharacter(direction){
+    sab.classList.add('moving');
+    setTimeout(()=> sab.classList.remove('moving'), 200);
 
-    switch(direction) {
-      case 'up': currentTop -= moveStep; break;
-      case 'down': currentTop += moveStep; break;
-      case 'left': currentLeft -= moveStep; break;
-      case 'right': currentLeft += moveStep; break;
-    }
+    let top = parseInt(getComputedStyle(sab).top);
+    let left = parseInt(getComputedStyle(sab).left);
 
-    sabCharacter.style.top = currentTop + 'px';
-    sabCharacter.style.left = currentLeft + 'px';
-    checkWin(currentLeft, currentTop);
+    if(direction==='up') top -= moveStep;
+    if(direction==='down') top += moveStep;
+    if(direction==='left') left -= moveStep;
+    if(direction==='right') left += moveStep;
+
+    sab.style.top = top + 'px';
+    sab.style.left = left + 'px';
+
+    checkWin();
   }
 
-  // ---------------- WIN LOGIC ----------------
-  function checkWin(left, top) {
-    // Example winning zone (adjust according to maze layout)
-    const winLeft = 560;
-    const winTopMin = 340;
-    const winTopMax = 380;
-
-    if(left === winLeft && top >= winTopMin && top <= winTopMax){
-      gameAudio.pause();
-      finishAudio.play();
-
-      maze.style.display = 'none';
-      controls.style.display = 'none';
-      finishScene.style.display = 'flex';
-      sabStand.style.display = 'none';
-      giveRose.style.display = 'block';
-
-      let nextLine = 0;
-      nextButton.addEventListener('click', () => {
-        if(nextLine < finishTexts.length){
-          finishTexts.forEach(el => el.style.opacity = 0);
-          finishTexts[nextLine].style.opacity = 1;
-          nextLine++;
-        } else {
-          clearInterval(roseInterval);
-          setTimeout(() => {
-            window.location.href = 'jas.html';
-          }, 400);
-        }
-      });
-    }
-  }
-
-  // ---------------- CONTROL BUTTON EVENTS ----------------
-  upButton.addEventListener('click', () => moveCharacter('up'));
-  downButton.addEventListener('click', () => moveCharacter('down'));
-  leftButton.addEventListener('click', () => moveCharacter('left'));
-  rightButton.addEventListener('click', () => moveCharacter('right'));
-
-  document.addEventListener('keydown', (e) => {
-    switch(e.key){
-      case 'ArrowUp': moveCharacter('up'); break;
-      case 'ArrowDown': moveCharacter('down'); break;
-      case 'ArrowLeft': moveCharacter('left'); break;
-      case 'ArrowRight': moveCharacter('right'); break;
-    }
+  // Keyboard control
+  document.addEventListener('keydown', e => {
+    if(e.key==='ArrowUp') moveCharacter('up');
+    if(e.key==='ArrowDown') moveCharacter('down');
+    if(e.key==='ArrowLeft') moveCharacter('left');
+    if(e.key==='ArrowRight') moveCharacter('right');
   });
 
+  // Button controls
+  document.querySelector('.upButton').addEventListener('click', () => moveCharacter('up'));
+  document.querySelector('.downButton').addEventListener('click', () => moveCharacter('down'));
+  document.querySelector('.leftButton').addEventListener('click', () => moveCharacter('left'));
+  document.querySelector('.rightButton').addEventListener('click', () => moveCharacter('right'));
+
+  // Win checker
+  function checkWin() {
+    let top = parseInt(getComputedStyle(sab).top);
+    let left = parseInt(getComputedStyle(sab).left);
+    if(left > 540 && left < 580 && top > 340 && top < 380){
+      maze.style.display = 'none';
+      controls.style.display = 'none';
+      finish.style.display = 'block';
+    }
+  }
+
+  // Finish dialogue
+  nextBtn.addEventListener('click', () => {
+    finishTexts.forEach(t => t.style.opacity=0);
+    if(currentLine<finishTexts.length){
+      finishTexts[currentLine].style.opacity=1;
+      currentLine++;
+    }
+  });
 });
