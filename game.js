@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yesBtn = document.querySelector('.yesBtn');
   const maze = document.querySelector('.mazeScene');
   const controls = document.querySelector('.controls');
-  const BackgroundEraser_20250502_131244813Character = document.querySelector('BackgroundEraser_20250502_131244813');
+  const chippoyCharacter = document.querySelector('BackgroundEraser_20250502_131244813');
   const finishScene = document.querySelector('.finishScene');
   const nextButton = document.querySelector('.nextButton');
   const sabStand = document.querySelector('.sabStand');
@@ -52,22 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function smallCharacter() {
     if (isClicked) {
-      BackgroundEraser_20250502_131244813Character.style.height = `2rem`;
-      BackgroundEraser_20250502_131244813Character.style.width = `2rem`;
+      chippoyCharacter.style.height = `2rem`;
+      chippoyCharacter.style.width = `2rem`;
     }
   }
 
   function winChecker() {
-    const currentLeft = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).left);
-    const currentTop = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).top);
+    const currentLeft = parseInt(getComputedStyle(chippoyCharacter).left);
+    const currentTop = parseInt(getComputedStyle(chippoyCharacter).top);
 
     if ((currentLeft === 560 && (currentTop === 360 || currentTop === 380))) {
       gameAudio.pause();
       finishAudio.play();
 
-      BackgroundEraser_20250502_131244813Character.style.height = `4rem`;
-      BackgroundEraser_20250502_131244813Character.style.width = `4rem`;
-      BackgroundEraser_20250502_131244813Character.style.top = `348px`;
+      chippoyCharacter.style.height = `4rem`;
+      chippoyCharacter.style.width = `4rem`;
+      chippoyCharacter.style.top = `348px`;
 
       maze.style.display = 'none';
       controls.style.display = 'none';
@@ -92,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveCharacter(direction) {
     isClicked = true;
     smallCharacter();
-    let currentTop = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).top || 0);
-    let currentLeft = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).left || 0);
+    let currentTop = parseInt(getComputedStyle(chippoyCharacter).top || 0);
+    let currentLeft = parseInt(getComputedStyle(chippoyCharacter).left || 0);
 
     switch(direction) {
-      case 'up': BackgroundEraser_20250502_131244813Character.style.top = currentTop - moveStep + 'px'; break;
-      case 'down': BackgroundEraser_20250502_131244813Character.style.top = currentTop + moveStep + 'px'; break;
-      case 'left': BackgroundEraser_20250502_131244813Character.style.left = currentLeft - moveStep + 'px'; break;
-      case 'right': BackgroundEraser_20250502_131244813Character.style.left = currentLeft + moveStep + 'px'; break;
+      case 'up': chippoyCharacter.style.top = currentTop - moveStep + 'px'; break;
+      case 'down': chippoyCharacter.style.top = currentTop + moveStep + 'px'; break;
+      case 'left': chippoyCharacter.style.left = currentLeft - moveStep + 'px'; break;
+      case 'right': chippoyCharacter.style.left = currentLeft + moveStep + 'px'; break;
     }
     winChecker();
   }
