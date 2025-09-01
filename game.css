@@ -1,23 +1,18 @@
-
+/* ---------------- Global Styles ---------------- */
 body {
-background: lightblue url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif') center/cover no-repeat;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 100vh;
-margin: 0;
- 
-background: url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif');
-background-position: center;
-background-size: cover;
-
-overflow: hidden;
-
+  background: lightblue url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
+/* ---------------- Dialogue / Welcome ---------------- */
 .dialogueContainer {
-  
   position: relative;
   width: 70%;
   height: 70%;
@@ -28,7 +23,7 @@ overflow: hidden;
   position: absolute;
   width: 40%;
   bottom: 0;
-  left: 35%;
+  left: 50%;
   transform: translateX(-50%);
 }
 
@@ -44,7 +39,6 @@ overflow: hidden;
 .dialogueText {
   position: absolute;
   font-size: 2rem;
-  font-family: "Pixelify Sans", sans-serif;
   color: black;
   width: 48%;
   text-align: center;
@@ -54,12 +48,11 @@ overflow: hidden;
 }
 
 .yesBtn {
-   position: absolute;
+  position: absolute;
   bottom: 1rem;
   left: 25%;
   padding: 0.625rem 1.25rem;
   font-size: 2rem;
-  font-family: "Pixelify Sans", sans-serif;
   border: 2px solid black;
   border-radius: 1.25rem;
   cursor: pointer;
@@ -78,18 +71,20 @@ overflow: hidden;
   height: 100%;
   top: 0;
   left: 0;
-} 
-
-.roseContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;  /* Width and height covers the whole browser page */
-    height: 100%;
-    overflow: hidden;   
-    pointer-events: none; animation: fall linear infinite;
-    z-index: -1; 
 }
+
+/* ---------------- Falling Roses ---------------- */
+.roseContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
 .rose {
   position: absolute;
   background: url('rose.svg') no-repeat center/contain;
@@ -99,70 +94,47 @@ overflow: hidden;
 }
 
 @keyframes fall {
-    0% {
-        transform: translateY(-100px);
-        opacity: 1;
-    }
-    40% { 
-        opacity: 1;
-    }
-    60% { 
-        opacity: 0.5;                        /* it slowly fades */
-    }
-    80% { 
-        opacity: 0.2;       
-    }
-    100% {
-        transform: translateY(100vh); 
-        opacity: 0; 
-    }
+  0% { transform: translateY(-100px); opacity: 1; }
+  40% { opacity: 1; }
+  60% { opacity: 0.5; }
+  80% { opacity: 0.2; }
+  100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* --- Welcome Screen Transition (for play button) --- */
-@keyframes fadeOutScale {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.8); 
-    }
-}
-
-.mazeScene {
+/* ---------------- Maze Scene ---------------- */
+.mazeScene, .finishScene {
   display: none;
   position: relative;
   width: 40%;
   height: 100%;
   top: 0;
   z-index: 1;
-  /* display: flex; justify-content: center; align-items: center; */
-  }
+}
 
 .mazeBackground {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    width: 800px;
-    height: 700px;
-    border-radius: 50px;
-    background-color: #FFDFDF;
-    border: solid 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 800px;
+  height: 700px;
+  border-radius: 50px;
+  background-color: #FFDFDF;
+  border: solid 4px;
 }
 
 .mazeWalls {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 800px;
-    height: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 800px;
+  height: 700px;
 }
 
+/* Characters */
 .sab, .isha {
   position: absolute;
   z-index: 2;
@@ -170,7 +142,7 @@ overflow: hidden;
 
 .sab {
   height: 4rem;
-  width: 4rem;  
+  width: 4rem;
   top: 360px;
   left: 60px;
 }
@@ -180,12 +152,75 @@ overflow: hidden;
   width: 4rem;
   top: 348px;
   right: 40px;
-
 }
 
+.sabStand, .giveRose {
+  position: absolute;
+  width: 25rem;
+  top: 10rem;
+  bottom: 0;
+  left: 30%;
+  transform: translateX(-50%);
+}
+
+.ishaStand {
+  position: absolute;
+  width: 19rem;
+  top: 13rem;
+  bottom: 0;
+  left: 75%;
+  transform: translateX(-50%);
+}
+
+/* ---------------- Dialogue Finish ---------------- */
+.finishDialogue {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.finish {
+  position: absolute;
+  font-size: 2rem;
+  top: 4.8rem;
+  left: 16.5rem;
+  width: 14rem;
+  z-index: 1;
+}
+
+.finishBox {
+  position: absolute;
+  left: 20%;
+  width: 26rem;
+  height: 20rem;
+}
+
+.secondLine, .thirdLine, .fourthLine, .fifthLine, .sixthLine, .seventhLine {
+  opacity: 0;
+}
+
+/* ---------------- Buttons ---------------- */
+.nextButton {
+  position: absolute;
+  height: 3rem;
+  width: 6rem;
+  font-size: 20px;
+  border: solid 3px;
+  border-radius: 10px;
+  background: lightblue;
+  top: 7rem;
+  left: 35rem;
+  transition: 0.3s ease, transform 0.2s ease;
+}
+
+.nextButton:hover {
+  transform: scale(1.15);
+}
+
+/* ---------------- Header Text ---------------- */
 .header {
   display: flex;
-  align-items: center ;
+  align-items: center;
   justify-content: center;
 }
 
@@ -194,22 +229,20 @@ h1, p {
   z-index: 2;
 }
 
-h1{
-  font-family: "Pixelify Sans", sans-serif;
-  top: 1.8rem;
+h1 {
   font-size: 3.5rem;
+  top: 1.8rem;
 }
 
 p {
-  font-family: "Pixelify Sans", sans-serif;
-  top: 6.8rem;
   font-size: 1.5rem;
+  top: 6.8rem;
 }
 
+/* ---------------- Controls Grid ---------------- */
 .controls {
-  display: none;
+  display: grid;
   position: absolute;
-  /* display: grid; */
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   bottom: 5rem;
@@ -218,8 +251,7 @@ p {
   gap: 2px;
 }
 
-.upButton, .rightButton, 
-.downButton, .leftButton {
+.upButton, .rightButton, .downButton, .leftButton {
   display: flex;
   height: 50px;
   width: 50px;  
@@ -234,122 +266,24 @@ p {
   background-position: center;
 }
 
-.upButton:active, .rightButton:active, .leftButton:active, .downButton:active {
-  transform: scale(1.50);
-}
-
+.upButton:active,
+.rightButton:active,
+.leftButton:active,
+.downButton:active,
 .upButton.active,
 .leftButton.active,
 .rightButton.active,
 .downButton.active {
-  transform: scale(1.50);
+  transform: scale(1.5);
 }
 
-.upButton {
-  background-image: url('up-arrow.svg');
-  grid-column: 2;
-  grid-row: 1;
+.upButton { background-image: url('up-arrow.svg'); grid-column: 2; grid-row: 1; }
+.leftButton { background-image: url('left-arrow.svg'); grid-column: 1; grid-row: 2; }
+.rightButton { background-image: url('right-arrow.svg'); grid-column: 3; grid-row: 2; }
+.downButton { background-image: url('down-arrow.svg'); grid-column: 2; grid-row: 3; }
 
-}
-
-.leftButton {
-  background-image: url('left-arrow.svg');
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.rightButton {
-  background-image: url('right-arrow.svg');
-  grid-column: 3;
-  grid-row: 2;
-}
-
-
-.downButton {
-  background-image: url('down-arrow.svg');
-  grid-column: 2;
-  grid-row: 3;
-}
-
-.finishScene {
-  display: none;
-  position: relative;
-  width: 40%;
-  height: 100%;
-  top: 0;
-  z-index: 1;
-  /* display: flex; justify-content: center; align-items: center; */
-  }
-
-.sabStand {
-  position: absolute;
-  width: 25rem;
-  bottom: 0;
-  top: 10rem;
-  left: 30%;
-  transform: translateX(-50%);
-}
-
-.giveRose {
-  display: none;
-  position: absolute;
-  width: 25rem;
-  bottom: 0;
-  top: 10rem;
-  left: 30%;
-  transform: translateX(-50%);
-}
-
-.ishaStand {
-  position: absolute;
-  width: 19rem;
-  top: 13rem;
-  bottom: 0;
-  left: 75%;
-  transform: translateX(-50%);
-}
-
-.finishDialogue {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.finish {
-  position: absolute;
-  font-family: "Pixelify Sans", sans-serif;
-  top: 4.8rem;
-  left: 16.5rem;
-  font-size: 2rem;
-  width: 14rem;
-  z-index: 1;
-}
-
-.finishBox {
-  position: absolute;
-  left: 20%;  
-  width: 26rem;
-  height: 20rem;
-}
-
-.secondLine, .thirdLine, .fourthLine, .fifthLine, .sixthLine, .seventhLine {
-  opacity: 0;
-}
-
-.nextButton {
-  position: absolute;
-  height: 3rem;
-  width: 6rem;
-  font-family: 'Pixelify Sans';
-  font-size: 20px;
-  border: solid 3px;
-  border-radius: 10px;
-  background: lightblue;
-  top: 7rem;
-  left: 35rem;
-  transition: 0.3s ease, transform 0.2s ease;
-}
-
-.nextButton:hover {
-  transform: scale(1.15);
+/* ---------------- Animations ---------------- */
+@keyframes fadeOutScale {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
 }
