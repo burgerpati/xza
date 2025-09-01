@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yesBtn = document.querySelector('.yesBtn');
   const maze = document.querySelector('.mazeScene');
   const controls = document.querySelector('.controls');
-  const sabCharacter = document.querySelector('.sab');
+  const BackgroundEraser_20250502_131244813Character = document.querySelector('BackgroundEraser_20250502_131244813');
   const finishScene = document.querySelector('.finishScene');
   const nextButton = document.querySelector('.nextButton');
   const sabStand = document.querySelector('.sabStand');
@@ -52,22 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function smallCharacter() {
     if (isClicked) {
-      sabCharacter.style.height = `2rem`;
-      sabCharacter.style.width = `2rem`;
+      BackgroundEraser_20250502_131244813Character.style.height = `2rem`;
+      BackgroundEraser_20250502_131244813Character.style.width = `2rem`;
     }
   }
 
   function winChecker() {
-    const currentLeft = parseInt(getComputedStyle(sabCharacter).left);
-    const currentTop = parseInt(getComputedStyle(sabCharacter).top);
+    const currentLeft = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).left);
+    const currentTop = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).top);
 
     if ((currentLeft === 560 && (currentTop === 360 || currentTop === 380))) {
       gameAudio.pause();
       finishAudio.play();
 
-      sabCharacter.style.height = `4rem`;
-      sabCharacter.style.width = `4rem`;
-      sabCharacter.style.top = `348px`;
+      BackgroundEraser_20250502_131244813Character.style.height = `4rem`;
+      BackgroundEraser_20250502_131244813Character.style.width = `4rem`;
+      BackgroundEraser_20250502_131244813Character.style.top = `348px`;
 
       maze.style.display = 'none';
       controls.style.display = 'none';
@@ -92,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveCharacter(direction) {
     isClicked = true;
     smallCharacter();
-    let currentTop = parseInt(getComputedStyle(sabCharacter).top || 0);
-    let currentLeft = parseInt(getComputedStyle(sabCharacter).left || 0);
+    let currentTop = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).top || 0);
+    let currentLeft = parseInt(getComputedStyle(BackgroundEraser_20250502_131244813Character).left || 0);
 
     switch(direction) {
-      case 'up': sabCharacter.style.top = currentTop - moveStep + 'px'; break;
-      case 'down': sabCharacter.style.top = currentTop + moveStep + 'px'; break;
-      case 'left': sabCharacter.style.left = currentLeft - moveStep + 'px'; break;
-      case 'right': sabCharacter.style.left = currentLeft + moveStep + 'px'; break;
+      case 'up': BackgroundEraser_20250502_131244813Character.style.top = currentTop - moveStep + 'px'; break;
+      case 'down': BackgroundEraser_20250502_131244813Character.style.top = currentTop + moveStep + 'px'; break;
+      case 'left': BackgroundEraser_20250502_131244813Character.style.left = currentLeft - moveStep + 'px'; break;
+      case 'right': BackgroundEraser_20250502_131244813Character.style.left = currentLeft + moveStep + 'px'; break;
     }
     winChecker();
   }
