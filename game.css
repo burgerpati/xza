@@ -12,45 +12,266 @@ body {
 }
 
 /* ---------------- Dialogue / Welcome ---------------- */
-.dialogueContainer { position: relative; width: 70%; height: 70%; top: 20px; }
-.sabRose { position: absolute; width: 40%; bottom:0; left:50%; transform:translateX(-50%); }
-.dialogueBox { position:absolute; top:0; left:0; width:100%; height:100%; border-radius:10px; }
-.dialogueText { position:absolute; font-size:2rem; color:black; width:50%; text-align:center; top:70px; left:50%; transform:translateX(-50%); }
-.yesBtn { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); padding:0.625rem 1.25rem; font-size:2rem; border:2px solid black; border-radius:1.25rem; cursor:pointer; transition:transform 0.3s ease; background:#fff; }
-.yesBtn:hover { transform: scale(1.15); outline:2px solid #333; }
+.dialogueContainer {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  top: 20px;
+}
+
+.sabRose {
+  position: absolute;
+  width: 40%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dialogueBox {
+  position: absolute;
+  top: -10%;
+  left: 42%;
+  width: 80%;
+  height: 70%;
+  border-radius: 10px;
+}
+
+.dialogueText {
+  position: absolute;
+  font-size: 2rem;
+  color: black;
+  width: 48%;
+  text-align: center;
+  top: 70px;
+  left: 65px;
+  z-index: 1;
+}
+
+.yesBtn {
+  position: absolute;
+  bottom: 1rem;
+  left: 25%;
+  padding: 0.625rem 1.25rem;
+  font-size: 2rem;
+  border: 2px solid black;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: #fff;
+}
+
+.yesBtn:hover {
+  transform: scale(1.15);
+  outline: 2px solid #333;
+}
 
 /* ---------------- Falling Roses ---------------- */
-.roseContainer { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; z-index:-1; }
-.rose { position:absolute; width:4.375rem; height:4.375rem; background:url('rose.svg') no-repeat center/contain; animation: fall linear infinite; }
-@keyframes fall { 0%{transform:translateY(-100px);opacity:1;}40%{opacity:1;}60%{opacity:0.5;}80%{opacity:0.2;}100%{transform:translateY(100vh);opacity:0;} }
+.roseContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.rose {
+  position: absolute;
+  background: url('rose.svg') no-repeat center/contain;
+  width: 4.375rem;
+  height: 4.375rem;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px); opacity: 1; }
+  40% { opacity: 1; }
+  60% { opacity: 0.5; }
+  80% { opacity: 0.2; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
 
 /* ---------------- Maze Scene ---------------- */
-.mazeScene, .finishScene { display:none; position:relative; width:40%; height:100%; top:0; z-index:1; }
-.mazeBackground { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:700px; border-radius:50px; background-color:#FFDFDF; border:solid 4px; z-index:1; }
-.mazeWalls { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:700px; z-index:2; }
+.mazeScene, .finishScene {
+  display: none;
+  position: relative;
+  width: 800px;
+  height: 700px;
+  margin: 0 auto;
+  top: 0;
+  z-index: 1;
+}
+
+.mazeContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #FFDFDF;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mazeBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Maze Walls */
+.wall {
+  position: absolute;
+  background-color: #8B0000; /* Dark red walls */
+  z-index: 2;
+}
 
 /* Characters */
-.sab, .isha { position:absolute; height:4rem; width:4rem; z-index:2; }
-.sab { top:360px; left:60px; }
-.isha { top:348px; right:40px; }
-.sabStand, .giveRose { position:absolute; width:25rem; top:10rem; left:30%; transform:translateX(-50%); display:none; }
-.ishaStand { position:absolute; width:19rem; top:13rem; left:75%; transform:translateX(-50%); }
+.sab, .isha {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  z-index: 3;
+}
+
+.sab { top: 360px; left: 60px; }
+.isha { top: 348px; right: 40px; }
+
+/* Character Stands */
+.sabStand, .giveRose {
+  position: absolute;
+  width: 25rem;
+  top: 10rem;
+  bottom: 0;
+  left: 30%;
+  transform: translateX(-50%);
+}
+
+.ishaStand {
+  position: absolute;
+  width: 19rem;
+  top: 13rem;
+  bottom: 0;
+  left: 75%;
+  transform: translateX(-50%);
+}
 
 /* ---------------- Finish Dialogue ---------------- */
-.finishDialogue { position:relative; width:100%; height:100%; }
-.finish { position:absolute; font-size:2rem; top:4.8rem; left:16.5rem; width:14rem; z-index:1; }
-.secondLine, .thirdLine, .fourthLine, .fifthLine, .sixthLine, .seventhLine { opacity:0; }
-.nextButton { position:absolute; top:7rem; left:50%; transform:translateX(-50%); font-size:20px; border:3px solid; border-radius:10px; background:lightblue; transition:0.3s ease; }
-.nextButton:hover { transform:scale(1.15); }
+.finishDialogue {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-/* ---------------- Controls ---------------- */
-.controls { display:none; position:absolute; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); bottom:5rem; right:33rem; z-index:3; gap:2px; display:grid; }
-.upButton, .rightButton, .downButton, .leftButton { display:flex; height:50px; width:50px; cursor:pointer; border-radius:50%; font-size:2rem; background-size:contain; background-repeat:no-repeat; background-position:center; transition:0.2s ease; }
-.upButton:active,.rightButton:active,.leftButton:active,.downButton:active,.upButton.active,.leftButton.active,.rightButton.active,.downButton.active { transform:scale(1.5); }
-.upButton { background-image:url('up-arrow.svg'); grid-column:2; grid-row:1; }
-.leftButton { background-image:url('left-arrow.svg'); grid-column:1; grid-row:2; }
-.rightButton { background-image:url('right-arrow.svg'); grid-column:3; grid-row:2; }
-.downButton { background-image:url('down-arrow.svg'); grid-column:2; grid-row:3; }
+.finish {
+  position: absolute;
+  font-size: 2rem;
+  top: 4.8rem;
+  left: 16.5rem;
+  width: 14rem;
+  z-index: 1;
+}
+
+.finishBox {
+  position: absolute;
+  left: 20%;
+  width: 26rem;
+  height: 20rem;
+}
+
+.secondLine, .thirdLine, .fourthLine, .fifthLine, .sixthLine, .seventhLine {
+  opacity: 0;
+}
+
+/* ---------------- Buttons ---------------- */
+.nextButton {
+  position: absolute;
+  height: 3rem;
+  width: 6rem;
+  font-size: 20px;
+  border: solid 3px;
+  border-radius: 10px;
+  background: lightblue;
+  top: 7rem;
+  left: 35rem;
+  transition: 0.3s ease, transform 0.2s ease;
+}
+
+.nextButton:hover {
+  transform: scale(1.15);
+}
+
+/* ---------------- Header Text ---------------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1, p {
+  position: absolute;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 3.5rem;
+  top: 1.8rem;
+}
+
+p {
+  font-size: 1.5rem;
+  top: 6.8rem;
+}
+
+/* ---------------- Controls Grid ---------------- */
+.controls {
+  display: grid;
+  position: absolute;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  bottom: 5rem;
+  right: 33rem;
+  z-index: 3;
+  gap: 2px;
+}
+
+.upButton, .rightButton, .downButton, .leftButton {
+  display: flex;
+  height: 50px;
+  width: 50px;  
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 50%;
+  transition: 0.3s ease, transform 0.2s ease;
+  z-index: 3;
+  font-size: 2rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.upButton:active,
+.rightButton:active,
+.leftButton:active,
+.downButton:active,
+.upButton.active,
+.leftButton.active,
+.rightButton.active,
+.downButton.active {
+  transform: scale(1.5);
+}
+
+.upButton { background-image: url('up-arrow.svg'); grid-column: 2; grid-row: 1; }
+.leftButton { background-image: url('left-arrow.svg'); grid-column: 1; grid-row: 2; }
+.rightButton { background-image: url('right-arrow.svg'); grid-column: 3; grid-row: 2; }
+.downButton { background-image: url('down-arrow.svg'); grid-column: 2; grid-row: 3; }
 
 /* ---------------- Animations ---------------- */
-@keyframes fadeOutScale { 0%{opacity:1; transform:scale(1);} 100%{opacity:0; transform:scale(0.8);} }
+@keyframes fadeOutScale {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
