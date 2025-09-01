@@ -1,91 +1,120 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const dialogue = document.querySelector('.dialogueContainer');
+  const roseContainer = document.querySelector('.roseContainer');
   const yesBtn = document.querySelector('.yesBtn');
   const maze = document.querySelector('.mazeScene');
-  const finish = document.querySelector('.finishScene');
-  const sab = document.querySelector('.sab');
   const controls = document.querySelector('.controls');
-  const nextBtn = document.querySelector('.nextButton');
-  const finishTexts = document.querySelectorAll('.finish');
-  const particleContainer = document.querySelector('.particleContainer');
+  const sabCharacter = document.querySelector('.sab');
+  const finishScene = document.querySelector('.finishScene');
+  const nextButton = document.querySelector('.nextButton');
+  const sabStand = document.querySelector('.sabStand');
+  const giveRose = document.querySelector('.giveRose');
 
-  let currentLine = 0;
-  let moveStep = 20;
+  // Buttons
+  const upButton = document.querySelector('.upButton');
+  const rightButton = document.querySelector('.rightButton');
+  const leftButton = document.querySelector('.leftButton');
+  const downButton = document.querySelector('.downButton');
 
-  // Play background music
-  let bgMusic = new Audio('game-audio.mp3');
-  bgMusic.loop = true;
-  bgMusic.volume = 0.8;
-  bgMusic.play();
+  // Music
+  const gameAudio = new Audio('game-audio.mp3');
+  gameAudio.volume = 1.0;
+  gameAudio.loop = true;
 
-  // Particle hearts
-  function createParticle() {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    particle.style.left = `${Math.random() * 100}vw`;
-    particle.style.animationDuration = `${3 + Math.random()*3}s`;
-    particleContainer.appendChild(particle);
-    particle.addEventListener('animationend', () => particle.remove());
+  const finishAudio = new Audio('finish-audio.mp3');
+
+  // Falling Roses
+  function createRose() {
+    const rose = document.createElement('div');
+    rose.classList.add('rose');
+    rose.style.left = `${Math.random() * 100}vw`;
+    rose.style.animationDuration = `${Math.random() * 4 + 3}s`;
+    rose.style.animationDelay = `${Math.random() * 2}s`;
+    roseContainer.appendChild(rose);
+    rose.addEventListener('animationend', () => rose.remove());
   }
-  setInterval(createParticle, 500);
 
-  // Start game
+  const roseInterval = setInterval(createRose, 2000);
+
+  // Start Maze after Yes Button Click
   yesBtn.addEventListener('click', () => {
-    dialogue.style.display = 'none';
-    maze.style.display = 'block';
+    document.querySelector('.dialogueContainer').style.display = 'none';
+    maze.style.display = 'flex';
+    maze.style.justifyContent = 'center';
+    maze.style.alignItems = 'center';
     controls.style.display = 'grid';
+
+    // Start music AFTER user interaction
+    if (gameAudio.paused) gameAudio.play().catch(err => console.log('Autoplay blocked:', err));
   });
 
-  // Movement functions
-  function moveCharacter(direction){
-    sab.classList.add('moving');
-    setTimeout(()=> sab.classList.remove('moving'), 200);
+  const moveStep = 20;
+  let isClicked = false;
 
-    let top = parseInt(getComputedStyle(sab).top);
-    let left = parseInt(getComputedStyle(sab).left);
-
-    if(direction==='up') top -= moveStep;
-    if(direction==='down') top += moveStep;
-    if(direction==='left') left -= moveStep;
-    if(direction==='right') left += moveStep;
-
-    sab.style.top = top + 'px';
-    sab.style.left = left + 'px';
-
-    checkWin();
-  }
-
-  // Keyboard control
-  document.addEventListener('keydown', e => {
-    if(e.key==='ArrowUp') moveCharacter('up');
-    if(e.key==='ArrowDown') moveCharacter('down');
-    if(e.key==='ArrowLeft') moveCharacter('left');
-    if(e.key==='ArrowRight') moveCharacter('right');
-  });
-
-  // Button controls
-  document.querySelector('.upButton').addEventListener('click', () => moveCharacter('up'));
-  document.querySelector('.downButton').addEventListener('click', () => moveCharacter('down'));
-  document.querySelector('.leftButton').addEventListener('click', () => moveCharacter('left'));
-  document.querySelector('.rightButton').addEventListener('click', () => moveCharacter('right'));
-
-  // Win checker
-  function checkWin() {
-    let top = parseInt(getComputedStyle(sab).top);
-    let left = parseInt(getComputedStyle(sab).left);
-    if(left > 540 && left < 580 && top > 340 && top < 380){
-      maze.style.display = 'none';
-      controls.style.display = 'none';
-      finish.style.display = 'block';
+  function smallCharacter() {
+    if (isClicked) {
+      sabCharacter.style.height = `2rem`;
+      sabCharacter.style.width = `2rem`;
     }
   }
 
-  // Finish dialogue
-  nextBtn.addEventListener('click', () => {
-    finishTexts.forEach(t => t.style.opacity=0);
-    if(currentLine<finishTexts.length){
-      finishTexts[currentLine].style.opacity=1;
-      currentLine++;
+  function winChecker() {
+    const currentLeft = parseInt(getComputedStyle(sabCharacter).left);
+    const currentTop = parseInt(getComputedStyle(sabCharacter).top);
+
+    if ((currentLeft === 560 && (currentTop === 360 || currentTop === 380))) {
+      gameAudio.pause();
+      finishAudio.play();
+
+      sabCharacter.style.height = `4rem`;
+      sabCharacter.style.width = `4rem`;
+      sabCharacter.style.top = `348px`;
+
+      maze.style.display = 'none';
+      controls.style.display = 'none';
+      finishScene.style.display = 'flex';
+
+      let nextLine = 0;
+      nextButton.addEventListener('click', () => {
+        nextLine++;
+        const lines = ['firstLine','secondLine','thirdLine','fourthLine','fifthLine','sixthLine','seventhLine'];
+        if (nextLine < lines.length) {
+          document.querySelector(`.${lines[nextLine-1]}`).style.opacity = 0;
+          document.querySelector(`.${lines[nextLine]}`).style.opacity = 1;
+          if(nextLine === 5) { sabStand.style.display='none'; giveRose.style.display='block'; }
+        } else {
+          clearInterval(roseInterval);
+          setTimeout(()=> window.location.href='jas.html',400);
+        }
+      });
+    }
+  }
+
+  function moveCharacter(direction) {
+    isClicked = true;
+    smallCharacter();
+    let currentTop = parseInt(getComputedStyle(sabCharacter).top || 0);
+    let currentLeft = parseInt(getComputedStyle(sabCharacter).left || 0);
+
+    switch(direction) {
+      case 'up': sabCharacter.style.top = currentTop - moveStep + 'px'; break;
+      case 'down': sabCharacter.style.top = currentTop + moveStep + 'px'; break;
+      case 'left': sabCharacter.style.left = currentLeft - moveStep + 'px'; break;
+      case 'right': sabCharacter.style.left = currentLeft + moveStep + 'px'; break;
+    }
+    winChecker();
+  }
+
+  upButton.addEventListener('click', ()=> moveCharacter('up'));
+  downButton.addEventListener('click', ()=> moveCharacter('down'));
+  leftButton.addEventListener('click', ()=> moveCharacter('left'));
+  rightButton.addEventListener('click', ()=> moveCharacter('right'));
+
+  document.addEventListener("keydown", (event) => {
+    switch(event.key) {
+      case 'ArrowUp': moveCharacter('up'); break;
+      case 'ArrowDown': moveCharacter('down'); break;
+      case 'ArrowLeft': moveCharacter('left'); break;
+      case 'ArrowRight': moveCharacter('right'); break;
     }
   });
 });
