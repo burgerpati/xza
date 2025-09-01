@@ -1,6 +1,6 @@
 
 body {
-background: lightblue url('background-2.jpeg') center/cover no-repeat;
+background: lightblue url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif') center/cover no-repeat;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -8,7 +8,7 @@ justify-content: center;
 height: 100vh;
 margin: 0;
  
-background-image: url('background-2.jpeg');
+background: url('https://i.pinimg.com/originals/11/55/f2/1155f25ce25e9b0e764222f598ebbe60.gif');
 background-position: center;
 background-size: cover;
 
