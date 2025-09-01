@@ -1,59 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  const fakeError = document.querySelector('.fake-error');
-
-  const heartsContainer = document.querySelector('.hearts-container') // grabs the hearts-container
+  const heartsContainer = document.querySelector('.hearts-container'); 
   const playButton = document.querySelector('.play-btn');
+  const mainBody = document.querySelector('main');
 
+  // Background music
   let gameAudio = new Audio('game-audio.mp3');
   gameAudio.volume = 1.0;
   gameAudio.loop = true; 
 
-  const mainBody = document.querySelector('main');
-
-  fakeError.addEventListener('click', () => {
-
+  // Start game when Play is clicked
+  playButton.addEventListener('click', () => {
     gameAudio.play();
-
     heartsContainer.style.display = 'block';
-    mainBody.style.display = 'block';
-    fakeError.style.display = 'none';
 
+    // Function to create falling hearts
     function createHeart() {
-        const heart = document.createElement('div');    // creates new div element
-        heart.classList.add('heart');                   // adds the heart css
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
 
-        // Set random horizontal position
-        heart.style.left = `${Math.random() * 100}vw`;
+      // Random horizontal position
+      heart.style.left = `${Math.random() * 100}vw`;
 
-        // Randomize animation duration for variety (e.g., 3 to 7 seconds)
-        const duration = Math.random() * 4 + 3;                             // Each heart will fall at a slightly different speed
-        heart.style.animationDuration = `${duration}s`;
+      // Random speed (3–7s)
+      const duration = Math.random() * 4 + 3;
+      heart.style.animationDuration = `${duration}s`;
 
-        // Randomize initial delay slightly (e.g., 0 to 2 seconds)
-        const delay = Math.random() * 2;
-        heart.style.animationDelay = `${delay}s`;
+      // Random delay (0–2s)
+      const delay = Math.random() * 2;
+      heart.style.animationDelay = `${delay}s`;
 
-        heartsContainer.appendChild(heart);   // It takes the heart element you've just created and styled, and inserts it as a child inside the heartsContainer HTML element. 
+      heartsContainer.appendChild(heart);
 
-        // Remove heart after its animation ends to clean up DOM
-        heart.addEventListener('animationend', () => {
-            heart.remove();
-        });
+      // Remove when done
+      heart.addEventListener('animationend', () => {
+        heart.remove();
+      });
     }
 
-    const heartInterval = setInterval(createHeart, 500);    // the function will be called every 0.5s
+    // Keep spawning hearts
+    const heartInterval = setInterval(createHeart, 500);
 
-    playButton.addEventListener('click', () => {
-      
+    // After 0.4s, go to game.html
+    setTimeout(() => {
       clearInterval(heartInterval);
-
-      setTimeout(() => {
-        window.location.href = 'game.html'
-      }, 400);
-
-    })
-  })
-})
-
-
+      window.location.href = 'game.html';
+    }, 400);
+  });
+});
