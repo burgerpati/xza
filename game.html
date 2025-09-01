@@ -5,53 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Love Maze</title>
   <link rel="stylesheet" href="game.css">
-  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Lilita+One&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- Falling Roses -->
-  <div class="roseContainer"></div>
-
-  <!-- Dialogue / Welcome -->
-  <div class="dialogueContainer">
-    <img src="sab-rose.svg" alt="Sab holding a rose" class="sabRose">
-    <div class="dialogueBox">
-      <p class="dialogueText">
-        lol wants to give you something, can you help him go through the maze?
-      </p>
-      <button class="yesBtn">Yes</button>
-    </div>
-  </div>
-
-  <!-- Maze Scene -->
+  <!-- Maze Section -->
   <div class="mazeScene">
-    <img src="maze-background.png" class="mazeBackground" alt="Maze background">
-    <img src="maze-walls.png" class="mazeWalls" alt="Maze walls">
-    <img src="sab.svg" class="sab" alt="Sab">
-    <img src="isha.svg" class="isha" alt="Isha">
+    <div class="header">
+      <h1>Love Maze</h1>
+      <p>Bienvenido</p>
+    </div>
 
+    <div class="mazeContainer">
+      <img src="maze-background.png" alt="maze-background" class="mazeBackground">
+
+      <!-- Maze Walls -->
+      <div class="wall" style="top:50px; left:50px; width:200px; height:20px;"></div>
+      <div class="wall" style="top:150px; left:100px; width:20px; height:200px;"></div>
+      <div class="wall" style="top:300px; left:250px; width:300px; height:20px;"></div>
+      <div class="wall" style="top:100px; left:400px; width:20px; height:300px;"></div>
+
+      <!-- Characters -->
+      <img src="sab.svg" class="sab" alt="Sab">
+      <img src="isha.svg" class="isha" alt="Isha">
+    </div>
+
+    <!-- Controls -->
     <div class="controls">
       <button class="upButton"></button>
       <button class="leftButton"></button>
       <button class="rightButton"></button>
       <button class="downButton"></button>
-    </div>
-  </div>
-
-  <!-- Finish Scene -->
-  <div class="finishScene">
-    <img src="sab-rose.svg" class="sabStand" alt="Sab Stand">
-    <img src="giveRose.svg" class="giveRose" alt="Give Rose">
-    <img src="isha-stand.svg" class="ishaStand" alt="Isha Stand">
-    <div class="finishDialogue">
-      <p class="finish firstLine">Hi Tintin</p>
-      <p class="finish secondLine">Thanks for helping me</p>
-      <p class="finish thirdLine">I thought I was lost</p>
-      <p class="finish fourthLine">but then I found you</p>
-      <p class="finish fifthLine">HAHAAHAH</p>
-      <p class="finish sixthLine">Here's your GIFT</p>
-      <p class="finish seventhLine">STREAKKKKK</p>
-      <button class="nextButton">Next</button>
     </div>
   </div>
 
