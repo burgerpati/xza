@@ -19,7 +19,7 @@ body {
   top: 20px;
 }
 
-.chipoyy {
+.sabRose {
   position: absolute;
   width: 40%;
   bottom: 0;
@@ -127,12 +127,12 @@ body {
 }
 
 /* ---------------- Characters ---------------- */
-.chippoy, .isha {
+.sab, .isha {
   position: absolute;
   z-index: 2;
 }
 
-.chippoy { height: 4rem; width: 4rem; top: 360px; left: 60px; }
+.sab { height: 4rem; width: 4rem; top: 360px; left: 60px; }
 .isha { height: 4rem; width: 4rem; top: 348px; right: 40px; }
 
 .sabStand, .giveRose {
