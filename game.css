@@ -57,7 +57,7 @@ body {
   border-radius: 1.25rem;
   cursor: pointer;
   transition: transform 0.3s ease;
-  background: #fff;
+  background: #d7837f
 }
 
 .yesBtn:hover {
