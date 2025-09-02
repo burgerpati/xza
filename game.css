@@ -19,7 +19,7 @@ body {
   top: 20px;
 }
 
-.sabRose {
+.chipoyy {
   position: absolute;
   width: 40%;
   bottom: 0;
@@ -177,7 +177,7 @@ body {
   font-size: 20px;
   border: solid 3px;
   border-radius: 10px;
-  background: lightblue;
+  background: #8fbc8f;
   top: 7rem;
   left: 35rem;
   transition: 0.3s ease, transform 0.2s ease;
