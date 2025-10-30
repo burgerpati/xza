@@ -12,6 +12,10 @@ body {
   background-position: center;
   background-size: cover;
 }
+/* Added pixel font */
+  font-family: 'Press Start 2P', cursive;
+  image-rendering: pixelated;
+  text-rendering: optimizeSpeed;
 
 /* Welcome Component Styles */
 main {
@@ -46,7 +50,7 @@ main {
 }
 
 .greeting {
-  font-family: "Lilita One", sans-serif;
+  font-family: 'Press Start 2P', cursive;
   font-size: 4.5rem;
   text-align: center;
   width: 50rem;
@@ -60,8 +64,8 @@ h1 {
 }
 
 .monthsary-date {
-  font-family: "GFS Didot", serif;
-  font-size: 20px;
+  font-family: "Press start 2P", cursive;
+  font-size: 20px; /* smaller since pixel fonts are big */
   margin-top: 45px;
   margin-bottom: 0;
 }
