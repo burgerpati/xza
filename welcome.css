@@ -12,10 +12,6 @@ body {
   background-position: center;
   background-size: cover;
 }
-/* Added pixel font */
-  font-family: 'Press Start 2P', cursive;
-  image-rendering: pixelated;
-  text-rendering: optimizeSpeed;
 
 /* Welcome Component Styles */
 main {
