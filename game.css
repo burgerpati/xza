@@ -1,6 +1,8 @@
 /* ---------------- Global Styles ---------------- */
 body {
-  background: lightblue url('https://i.pinimg.com/originals/1a/17/11/1a17113357e09775f3855f982be25a50.gif') center/cover no-repeat;
+  background-image: url('backgrounds.png');
+  background-position: center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
