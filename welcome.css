@@ -16,7 +16,7 @@ body {
 /* Welcome Component Styles */
 main {
   display: flex; /* visible immediately */
-   background-image: url('back.png');
+  background-image: url('backs.png');
   background-position: center;
   background-size: cover;
   width: 45%;
